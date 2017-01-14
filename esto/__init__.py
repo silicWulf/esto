@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-import requests
+import urllib.request
 
 class e621File:
     def __init__(self,id,tags,description,creator_id,author,change,source,score,fav_count,md5,file_size,file_url,file_ext,preview_url,preview_width,preview_height,sample_url,sample_width,sample_height,rating,status,width,height,has_comments,has_notes,has_children,children,parent_id,artists,sources):
@@ -40,9 +40,12 @@ class UnsupportedType(Exception):
         self.message = message
 
 e6url = "https://e621.net/post/index.json?limit=1&tags="
+def _req(url):
+    req = urllib.request.Request(url, None, {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
+    return urllib.request.urlopen(req).read()
 
 def _retid(url):
-    req = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
+    req = _req(url)
     jsonreq = json.loads(req.text)
     for i in jsonreq:
         pornobj = e621File(str(i['id']), i['tags'].split(' '), i['description'], str(i['creator_id']), str(i['author']), int(i['change']), i['source'], int(i['score']), int(i['fav_count']), i['md5'], str(i['file_size']), i['file_url'], i['file_ext'], i['preview_url'], i['preview_width'], i['preview_height'], i['sample_url'], i['sample_width'], i['sample_height'], i['rating'], i['status'], i['width'], i['height'], i['has_comments'], i['has_notes'], i['has_children'], i['children'], i['parent_id'], i['artist'], i['source'])
@@ -56,7 +59,7 @@ def _rettags(tags):
     else:
         raise UnsupportedType("the given var type is not supported, must be either list or str")
     url = e6url + taglist
-    req = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
+    req = _req(url)
     jsonreq = json.loads(req.text)
     for i in jsonreq:
         pornobj = e621File(str(i['id']), i['tags'].split(' '), i['description'], str(i['creator_id']), str(i['author']), int(i['change']), i['source'], int(i['score']), int(i['fav_count']), i['md5'], str(i['file_size']), i['file_url'], i['file_ext'], i['preview_url'], i['preview_width'], i['preview_height'], i['sample_url'], i['sample_width'], i['sample_height'], i['rating'], i['status'], i['width'], i['height'], i['has_comments'], i['has_notes'], i['has_children'], i['children'], i['parent_id'], i['artist'], i['source'])
@@ -71,5 +74,5 @@ def getdata(tags):
 def downloadfile(tags,filename):
     pornobj = _rettags(tags)
     file = open(filename, "w")
-    file.write(requests.get(pornobj.file_url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}))
+    file.write(_req(pornobj.file_url))
     file.close()
