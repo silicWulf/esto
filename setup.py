@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
     name = 'esto',
     packages = ['esto'],
-    version = '0.0.1',
+    version = '0.0.4',
     description = 'A simple-to-use e621 API wrapper. Requires `requests` library.',
     author = 'silicWulf',
     author_email = 'me@siliconwolf.pw',
