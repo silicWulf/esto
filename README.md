@@ -1,4 +1,4 @@
-### esto - An e621 API wrapper
+# esto - An e621 API wrapper
 
 esto is an easy-to-use e621 API wrapper, with a goal of covering the entirety of the e621 API in a simple form.
 
@@ -8,7 +8,7 @@ As of 0.0.1, the module has two simple functions: getting a file object, and dow
 
 In addition, the module currently uses the `requests` module to post requests to the API. In the future the `requests` module will not be required.
 
-# esto.e621File
+### esto.e621File
 An `e621File` object.
  * `id` -- post id (str) 
  * `tags` -- tags associated with the post (str)
@@ -39,11 +39,11 @@ An `e621File` object.
  * `artists` -- list of artists of the file (list) 
  * `sources` -- list of sources of the file (list)
 
-# esto.getdata(tags)
+### esto.getdata(tags)
 Returns an `e621File` object with data retrieved from the API.
  * `tags` -- can either be a list of tags or a single string, with tags seperated by spaces.
 
-# esto.downloadfile(tags, filename)
+### esto.downloadfile(tags, filename)
 Downloads a file with the tags `tags` locally at `filename`.
  * `tags` -- can either be a list of tags or a single string, with tags seperated by spaces. (list/str)
  * `filename` -- local path for file (str)
