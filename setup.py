@@ -5,7 +5,7 @@ setup(
     version = '0.0.1',
     description = 'A simple-to-use e621 API wrapper. Requires `requests` library.',
     author = 'silicWulf',
-    author_email = '',
+    author_email = 'me@siliconwolf.pw',
     url = 'https://github.com/silicWulf/esto',
     download_url = 'https://github.com/silicWulf/esto/tarball/0.0.1',
     keywords = ['api', 'e621', 'esto', 'wrapper'],

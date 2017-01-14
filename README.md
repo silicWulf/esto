@@ -47,3 +47,7 @@ Returns an `e621File` object with data retrieved from the API.
 Downloads a file with the tags `tags` locally at `filename`.
  * `tags` -- can either be a list of tags or a single string, with tags seperated by spaces. (list/str)
  * `filename` -- local path for file (str)
+
+### resto.resolveid(id)
+Returns an `e621File` object with the given id `id`.
+ * `id` -- id of a post you would like to resolve (str)
