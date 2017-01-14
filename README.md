@@ -2,11 +2,9 @@
 
 esto is an easy-to-use e621 API wrapper, with a goal of covering the entirety of the e621 API in a simple form.
 
-## Functions (0.0.1)
+## Functions
 
-As of 0.0.1, the module has three simple functions: getting a file object, downloading a file object automatically, and resolving a post with a given id, all accepting tags as parameters.
-
-In addition, the module currently uses the `requests` module to post requests to the API. In the future the `requests` module will not be required.
+As of 0.0.5, the module has three simple functions: getting a file object, downloading a file object automatically, and resolving a post with a given id, all accepting tags as parameters.
 
 ### esto.e621File
 An `e621File` object.
