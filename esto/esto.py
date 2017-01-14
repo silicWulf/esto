@@ -41,7 +41,14 @@ class UnsupportedType(Exception):
 
 e6url = "https://e621.net/post/index.json?limit=1&tags="
 
-def _ret(tags):
+def _retid(url):
+    req = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
+    jsonreq = json.loads(req.text)
+    for i in jsonreq:
+        pornobj = e621File(str(i['id']), i['tags'].split(' '), i['description'], str(i['creator_id']), str(i['author']), int(i['change']), i['source'], int(i['score']), int(i['fav_count']), i['md5'], str(i['file_size']), i['file_url'], i['file_ext'], i['preview_url'], i['preview_width'], i['preview_height'], i['sample_url'], i['sample_width'], i['sample_height'], i['rating'], i['status'], i['width'], i['height'], i['has_comments'], i['has_notes'], i['has_children'], i['children'], i['parent_id'], i['artist'], i['source'])
+    return pornobj
+
+def _rettags(tags):
     if type(tags) is list:
         taglist = '+'.join(tags)
     elif type(tags) is str:
@@ -50,15 +57,19 @@ def _ret(tags):
         raise UnsupportedType("the given var type is not supported, must be either list or str")
     url = e6url + taglist
     req = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
-    jsonreq = json.reads(req.text)
+    jsonreq = json.loads(req.text)
     for i in jsonreq:
-        pornobj = e621File(str(i['id'])), i['tags'].split(' '), i['description'], str(i['creator_id']), str(i['author']), int(i['change']), i['source'], int(i['score']), int(i['fav_count']), i['md5'], str(i['file_size']), i['file_url'], i['file_ext'], i['preview_url'], i['preview_width'], i['preview_height'], i['sample_url'], i['sample_width'], i['sample_height'], i['rating'], i['status'], i['width'], i['height'], i['has_comments'], i['has_notes'], i['has_children'], i['children'], i['parent_id'], i['artists'], i['sources'])
+        pornobj = e621File(str(i['id']), i['tags'].split(' '), i['description'], str(i['creator_id']), str(i['author']), int(i['change']), i['source'], int(i['score']), int(i['fav_count']), i['md5'], str(i['file_size']), i['file_url'], i['file_ext'], i['preview_url'], i['preview_width'], i['preview_height'], i['sample_url'], i['sample_width'], i['sample_height'], i['rating'], i['status'], i['width'], i['height'], i['has_comments'], i['has_notes'], i['has_children'], i['children'], i['parent_id'], i['artist'], i['source'])
+    return pornobj
+def resolveid(id):
+    url = "https://e621.net/post/show.json?id=" + id
+    pornobj = _retid(url)
     return pornobj
 def getdata(tags):
-    pornobj = _ret(tags)
+    pornobj = _rettags(tags)
     return pornobj
 def downloadfile(tags,filename):
-    pornobj = _ret(tags)
+    pornobj = _rettags(tags)
     file = open(filename, "w")
     file.write(requests.get(pornobj.file_url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}))
     file.close()
