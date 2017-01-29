@@ -40,9 +40,10 @@ def getdata(tags):
     return pornobj
 def downloadfile(tags,filename):
     pornobj = _rettags(tags)
-    file = open(filename, "w")
-    file.write(_req(pornobj.file_url))
-    file.close()
+    if pornobj.id != None:
+        file = open(filename, "w")
+        file.write(_req(pornobj.file_url))
+        file.close()
 
 
 class e621Post:

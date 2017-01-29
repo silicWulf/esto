@@ -6,6 +6,9 @@ esto is an easy-to-use e621 API wrapper, with a goal of covering the entirety of
 
 As of 0.0.5, the module has three simple functions: getting a file object, downloading a file object automatically, and resolving a post with a given id, all accepting tags as parameters.
 
+##todo:
+ * Republish the latest build to pypi
+
 ### esto.e621File
 An `e621File` object.
  * `id` -- post id (str) 
@@ -38,11 +41,11 @@ An `e621File` object.
  * `sources` -- list of sources of the file (list)
 
 ### esto.getdata(tags)
-Returns an `e621File` object with data retrieved from the API.
+Returns an `e621File` object with data retrieved from the API. Note: if a post search yields no results, then an `e621File` object with all fields equalling `None` will be returned instead.
  * `tags` -- can either be a list of tags or a single string, with tags seperated by spaces.
 
 ### esto.downloadfile(tags, filename)
-Downloads a file with the tags `tags` locally at `filename`.
+Downloads a file with the tags `tags` locally at `filename`. Note: if a post search yields no results, then no file will be downloaded.
  * `tags` -- can either be a list of tags or a single string, with tags seperated by spaces. (list/str)
  * `filename` -- local path for file (str)
 
