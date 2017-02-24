@@ -1,6 +1,0 @@
-.gitignore
-MANIFEST
-dist/
-__pycache__/
-build/
-*~
