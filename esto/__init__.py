@@ -53,8 +53,7 @@ def downloadfile(tags,filename):
         file = open(filename, "w")
         file.write(_req(pornobj.file_url))
         file.close()
-
-
+        
 class e621Post:
     def __init__(self,id,tags,description,creator_id,author,change,source,score,fav_count,md5,file_size,file_url,file_ext,preview_url,preview_width,preview_height,sample_url,sample_width,sample_height,rating,status,width,height,has_comments,has_notes,has_children,children,parent_id,artists,sources):
         self.id = id
