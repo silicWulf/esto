@@ -44,6 +44,10 @@ def resolveid(id):
     url = "https://e621.net/post/show.json?id=" + id
     pornobj = _retid(url)
     return pornobj
+def resolvehash(filehash):
+    url = 'https://e621.net/post/show.json?md5=' + filehash
+    pornobj = _retid(url)
+    return pornobj
 def getdata(tags):
     pornobj = _rettags(tags)
     return pornobj
