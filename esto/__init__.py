@@ -10,10 +10,11 @@ def _req(url):
 
 def _retid(url):
     try:
+        print(url)
         req = _req(url)
         jsonreq = json.loads(req.decode())
-        for i in jsonreq:
-            pornobj = e621Post(str(i['id']), i['tags'].split(' '), i['description'], str(i['creator_id']), str(i['author']), int(i['change']), i['source'], int(i['score']), int(i['fav_count']), i['md5'], str(i['file_size']), i['file_url'], i['file_ext'], i['preview_url'], i['preview_width'], i['preview_height'], i['sample_url'], i['sample_width'], i['sample_height'], i['rating'], i['status'], i['width'], i['height'], i['has_comments'], i['has_notes'], i['has_children'], i['children'], i['parent_id'], i['artist'], i['source'])
+        i = jsonreq
+        pornobj = e621Post(str(i['id']), i['tags'].split(' '), i['description'], str(i['creator_id']), str(i['author']), int(i['change']), i['source'], int(i['score']), int(i['fav_count']), i['md5'], str(i['file_size']), i['file_url'], i['file_ext'], i['preview_url'], i['preview_width'], i['preview_height'], i['sample_url'], i['sample_width'], i['sample_height'], i['rating'], i['status'], i['width'], i['height'], i['has_comments'], i['has_notes'], i['has_children'], i['children'], i['parent_id'], i['artist'], i['source'])
         return pornobj
     except ValueError:
         warnings.warn("Warning: post deleted or undefined error. Setting all values to none.")
